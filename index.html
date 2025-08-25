@@ -1,0 +1,30 @@
+<title>ARGUS</title>
+
+<body>
+
+<h1 id="txt">ARGUS</h1>	
+<div class="camera">
+  <video id="video">Video stream not available.</video>
+</div>
+
+<br>
+
+<div class="buttons">
+	<button id="permissions-button">Allow camera</button>
+	<button id="start-button">Capture photo</button>
+	<button id="readId">OCR</button>
+</div>
+
+<br>
+
+<canvas id="canvas" style="display: none;"></canvas>
+
+<img id="photo" alt="The screen capture will appear in this box." src='test/idCleanHalf.jpg' width="40%"/>
+
+</body>
+
+<script src='tesseract.min.js'></script>
+<script src="main.js"></script>
+<script src="ocr.js"></script>
+<link href="style.css" rel="stylesheet" />
+
