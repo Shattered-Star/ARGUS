@@ -11,7 +11,7 @@ const allowButton = document.getElementById("permissions-button");
 
 allowButton.addEventListener("click", () => {
   navigator.mediaDevices
-    .getUserMedia({ video: { facingMode: "environment", aspectRatio: 12/16}, audio: false })
+    .getUserMedia({ video: { facingMode: "environment", aspectRatio: 11/16}, audio: false })
     .then((stream) => {
       video.srcObject = stream;
       video.play();
