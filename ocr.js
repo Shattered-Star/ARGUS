@@ -5,6 +5,7 @@ document.getElementById("readId").addEventListener("click", () => {
 		{ logger: m => console.log(m),}
 	).then(({ data: { text } }) => {
 		console.log("Recognized text:", text);
+		navigator.clipboard.writeText(text);
 		alert(text);
 	});
 });

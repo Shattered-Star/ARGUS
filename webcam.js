@@ -8,9 +8,10 @@ const canvas = document.getElementById("canvas");
 const photo = document.getElementById("photo");
 const startButton = document.getElementById("start-button");
 const allowButton = document.getElementById("permissions-button");
+
 allowButton.addEventListener("click", () => {
   navigator.mediaDevices
-    .getUserMedia({ video: { facingMode: "environment", aspectRatio: 9/16}, audio: false })
+    .getUserMedia({ video: { facingMode: "environment", aspectRatio: 12/16}, audio: false })
     .then((stream) => {
       video.srcObject = stream;
       video.play();
@@ -19,12 +20,12 @@ allowButton.addEventListener("click", () => {
       console.error(`An error occurred: ${err}`);
     });
 });
+
 video.addEventListener(
   "canplay",
   (ev) => {
     if (!streaming) {
       height = video.videoHeight / (video.videoWidth / width);
-
       video.setAttribute("width", width);
       video.setAttribute("height", height);
       canvas.setAttribute("width", width);
@@ -34,6 +35,7 @@ video.addEventListener(
   },
   false,
 );
+
 startButton.addEventListener(
   "click",
   (ev) => {
