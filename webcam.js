@@ -10,15 +10,22 @@ const startButton = document.getElementById("start-button");
 const allowButton = document.getElementById("permissions-button");
 
 allowButton.addEventListener("click", () => {
-  navigator.mediaDevices
-    .getUserMedia({ video: { facingMode: "environment", aspectRatio: 11/16}, audio: false })
-    .then((stream) => {
-      video.srcObject = stream;
-      video.play();
-    })
-    .catch((err) => {
-      console.error(`An error occurred: ${err}`);
-    });
+	navigator.mediaDevices
+	.getUserMedia({ 
+		video: { facingMode: "environment", advanced: [{ torch: true }], aspectRatio: 9/16}, 
+		audio: false
+	})
+	.then((stream) => {
+		const track = stream.getVideoTracks()[0];
+		if (track.getCapabilities().torch) {
+			track.applyConstraints({ advanced: [{ torch: true }] });
+		};
+		video.srcObject = stream;
+		video.play();
+	})
+	.catch((err) => {
+		console.error(`An error occurred: ${err}`);
+	});
 });
 
 video.addEventListener(

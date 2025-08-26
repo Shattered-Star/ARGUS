@@ -13,6 +13,7 @@
 	<button id="permissions-button">Allow camera</button>
 	<button id="start-button">Capture photo</button>
 	<button id="readId">OCR</button>
+	<button id="toggleLight">Light</button>
 </div>
 
 <br>
@@ -23,8 +24,10 @@
 
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+
 <script src='tesseract.min.js'></script>
-<script src="webcam.js"></script>
+<script src="webcam.js?v=7"></script>
 <script src="ocr.js"></script>
 <link href="style.css" rel="stylesheet" />
-
