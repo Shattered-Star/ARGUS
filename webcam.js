@@ -11,25 +11,10 @@ const allowButton = document.getElementById("permissions-button");
 const torchButton = document.getElementById("toggleLight");
 let track;
 
-navigator.mediaDevices
-.getUserMedia({ 
-	video: { facingMode: "environment", aspectRatio: 9/16}, 
-	audio: false
-})
-.then((stream) => {
-	const track = stream.getVideoTracks()[0];
-	video.srcObject = stream;
-	video.play();
-})
-.catch((err) => {
-	console.error(`An error occurred: ${err}`);
-});
-
-
-torchButton.addEventListener("click", () => {
+function webcam(params){
 	navigator.mediaDevices
 	.getUserMedia({ 
-		video: { facingMode: "environment", advanced: [{ torch: true }], aspectRatio: 9/16}, 
+		video: params, 
 		audio: false
 	})
 	.then((stream) => {
@@ -40,6 +25,12 @@ torchButton.addEventListener("click", () => {
 	.catch((err) => {
 		console.error(`An error occurred: ${err}`);
 	});
+};
+
+webcam({ facingMode: "environment", aspectRatio: 9/16});
+
+torchButton.addEventListener("click", () => {
+	webcam({ facingMode: "environment", advanced: [{ torch: true }], aspectRatio: 9/16});
 });
 
 video.addEventListener(
