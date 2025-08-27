@@ -8,24 +8,29 @@ const canvas = document.getElementById("canvas");
 const photo = document.getElementById("photo");
 const startButton = document.getElementById("start-button");
 const allowButton = document.getElementById("permissions-button");
+const torchButton = document.getElementById("toggleLight");
+let track;
 
-allowButton.addEventListener("click", () => {
-	navigator.mediaDevices
-	.getUserMedia({ 
-		video: { facingMode: "environment", advanced: [{ torch: true }], aspectRatio: 9/16}, 
-		audio: false
-	})
-	.then((stream) => {
-		const track = stream.getVideoTracks()[0];
-		if (track.getCapabilities().torch) {
-			track.applyConstraints({ advanced: [{ torch: true }] });
-		};
-		video.srcObject = stream;
-		video.play();
-	})
-	.catch((err) => {
-		console.error(`An error occurred: ${err}`);
-	});
+navigator.mediaDevices
+.getUserMedia({ 
+	video: { facingMode: "environment", advanced: [{ torch: true }], aspectRatio: 9/16}, 
+	audio: false
+})
+.then((stream) => {
+	const track = stream.getVideoTracks()[0];
+	video.srcObject = stream;
+	video.play();
+})
+.catch((err) => {
+	console.error(`An error occurred: ${err}`);
+});
+
+
+torchButton.addEventListener("click", () => {
+	console.log('torchButton called');
+	if (track.getCapabilities().torch) {
+		track.applyConstraints({ advanced: [{ torch: true }] });
+	};
 });
 
 video.addEventListener(
