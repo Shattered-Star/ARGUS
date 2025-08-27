@@ -13,7 +13,7 @@ let track;
 
 navigator.mediaDevices
 .getUserMedia({ 
-	video: { facingMode: "environment", advanced: [{ torch: true }], aspectRatio: 9/16}, 
+	video: { facingMode: "environment", aspectRatio: 9/16}, 
 	audio: false
 })
 .then((stream) => {
@@ -27,10 +27,19 @@ navigator.mediaDevices
 
 
 torchButton.addEventListener("click", () => {
-	console.log('torchButton called');
-	if (track.getCapabilities().torch) {
-		track.applyConstraints({ advanced: [{ torch: true }] });
-	};
+	navigator.mediaDevices
+	.getUserMedia({ 
+		video: { facingMode: "environment", advanced: [{ torch: true }], aspectRatio: 9/16}, 
+		audio: false
+	})
+	.then((stream) => {
+		const track = stream.getVideoTracks()[0];
+		video.srcObject = stream;
+		video.play();
+	})
+	.catch((err) => {
+		console.error(`An error occurred: ${err}`);
+	});
 });
 
 video.addEventListener(
